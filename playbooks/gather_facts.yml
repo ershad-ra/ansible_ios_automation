@@ -1,0 +1,21 @@
+---
+- hosts: R1
+  gather_facts: true
+  gather_subset: all
+  connection: local
+
+  tasks:
+    - name: print ansible facts
+      debug:
+        msg:
+          - "ios type: {{ ansible_facts.net_iostype }}"
+          - "Hostname: {{ ansible_facts.net_hostname }}"
+          - "IPv4 Addresses: {{ ansible_facts.net_all_ipv4_addresses }}"
+          - "GigabitEthernet0/1 Interface: {{ ansible_facts.net_interfaces['GigabitEthernet0/1'].ipv4[0].address }}"
+          - "Image name and Location: {{ ansible_facts.net_image }}"
+          - "API: {{ ansible_facts.net_api }}"
+          - "Python Version: {{ ansible_facts.net_python_version }}"
+          - "Serial Number: {{ ansible_facts.net_serialnum }}"
+          - "OS Name: {{ ansible_facts.net_system }}"
+          - "Version Number: {{ ansible_facts.net_version }}"
+

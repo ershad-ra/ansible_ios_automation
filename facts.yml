@@ -1,0 +1,20 @@
+# BEGIN ANSIBLE MANAGED BLOCK
+device_facts:
+  router:
+    serial_number: FCZ2109400W
+    ios_version: 15.4(3)M3
+    device_model: CISCO1921/K9
+    image_name: usbflash0:c1900-universalk9-mz.SPA.154-3.M3.bin
+  sw1-core:
+    serial_number: CAT0805N157
+    ios_version: 12.2(52)SE
+    device_model: WS-C3750G-24T
+    image_name: flash:/c3750-ipbasek9-mz.122-52.SE.bin
+  sw1-access:
+    serial_number: FOC0616X1Q0
+    ios_version: 12.1(22)EA13
+    device_model: WS-C2950-24
+    image_name: flash:/c2950-i6k2l2q4-mz.121-22.EA13.bin
+Configured Interfaces:
+   {'description': None, 'macaddress': '2cd0.2df4.7821', 'mtu': 1500, 'bandwidth': 1000000, 'mediatype': 'RJ45', 'duplex': 'Full', 'lineprotocol': 'up', 'operstatus': 'up', 'type': 'CN Gigabit Ethernet', 'ipv4': [{'address': '172.16.3.245', 'subnet': '24'}]}: 172.16.3.245
+# END ANSIBLE MANAGED BLOCK

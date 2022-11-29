@@ -1,0 +1,16 @@
+[router]
+R1
+
+[core]
+sw1-core
+
+[access]
+sw1-access
+
+[lan:children]
+core
+access
+
+[network:children]
+router
+lan

@@ -1,0 +1,19 @@
+---
+- name:
+  hosts: core
+  gather_facts: no
+  tasks:
+    - name: 
+      cli_command:
+        command: 'copy ftp://172.16.3.123/test.txt flash:/test.txt'
+        check_all: True
+        prompt:
+          - 'Address or name of remote host'
+          - 'Source filename'
+          - 'Destination filename'
+        answer:
+          - '<ip address ftp server>'
+          - '<image file.bin>'
+          - '<image file.bin'
+      vars:
+         ansible_command_timeout: 1200

@@ -1,0 +1,21 @@
+---
+- name: show run for all
+  hosts: network
+  tasks:
+    - name: run show version commands
+      ios_command:
+        commands:
+         - show version | incl Version
+         - show clock
+      register: output
+
+    - name:
+      file:
+        path: ./output
+        state: directory
+        mode: '0755'
+
+    - name: copy output to file
+      copy:
+        content: "{{ output.stdout_lines | to_nice_yaml }}"
+        dest: "./output/{{ inventory_hostname }}.show_commands.txt"

@@ -1,0 +1,8 @@
+---
+- hosts: network
+  gather_facts: false
+  connection: network_cli
+  tasks:
+    - name: backup config
+      ios_config:
+        backup: yes

@@ -1,0 +1,19 @@
+---
+- name: backup images with tftp
+  hosts: network
+  gather_facts: no
+  vars:
+    ansible_command_timeout: 300
+    tftp_server: 172.16.3.123
+  tasks:
+    - name: collecting device facts
+      ios_facts:
+
+    - name: enable file prompt quiet
+      ios_config:
+        lines: file prompt quiet
+
+    - name: copy image to tftp server
+      ios_command:
+        commands:
+          - command: "copy {{ ansible_net_image }} tftp://{{ tftp_server }}/"

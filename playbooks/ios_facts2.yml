@@ -1,0 +1,37 @@
+---
+- name: "collect device facts"
+  hosts: network
+  tasks:
+    - name: "gather device facts"
+      ios_facts:
+        gather_subset: all
+      register: device_facts
+    - debug:
+        var: device_facts
+
+    - name: "write Device Facts"
+      blockinfile:
+        path: ../facts.yml
+        create: yes
+        block: |
+          device_facts:
+          {% for host in play_hosts %}
+          {% set node = hostvars[host] %}
+            {{ node.ansible_net_hostname }}:
+              serial_number: {{ node.ansible_net_serialnum }}
+              ios_version: {{ node.ansible_net_version }}
+              device_model: {{ node.ansible_net_model }}
+              image_name: {{ node.ansible_net_image }}
+          {% endfor %}
+          Configured Interfaces:
+          {% for host in play_hosts %}
+          {% set node = hostvars[host] %}
+          {% if node.ansible_net_interfaces is defined %}
+          {% if node.ansible_net_interfaces['GigabitEthernet0/1'].ipv4 is defined %}
+             {{ node.ansible_net_interfaces['GigabitEthernet0/1']}}: {{ node.ansible_net_interfaces['GigabitEthernet0/1'].ipv4[0].address }}
+          {% endif %}
+          {% endif %}
+          {% endfor %}
+      run_once: yes
+      delegate_to: localhost
+

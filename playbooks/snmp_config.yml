@@ -1,0 +1,17 @@
+---
+- name: Configure SNMPv3 on Cisco IOS Switches
+  hosts: sw1-core
+  gather_facts: no
+  vars:
+    snmp_auth_pass: pass1234
+    snmp_priv_pass: pass5678
+    snmp_group: mygroup
+    snmp_user: admin
+
+  tasks:
+    - name: Create a group and configure SNMPv3
+      ios_config:
+        lines:
+          - "snmp-server group {{ snmp_group }} v3 priv"
+          - "snmp-server user {{ snmp_user }} {{ snmp_group }} v3 auth sha {{ snmp_auth_pass }} priv aes 128 {{ snmp_priv_pass }}"
+
